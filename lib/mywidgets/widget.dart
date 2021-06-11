@@ -19,38 +19,34 @@ Widget brandName() {
 }
 
 Widget wallpaperWidget(List<WallpaperModel> wallpaperList, context) {
-  return Container(
-    //height: 400,
-    margin: EdgeInsets.symmetric(vertical: 10),
-    height: MediaQuery.of(context).size.height,
-    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-    child: GridView.builder(
-        physics: ClampingScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 6,
-          mainAxisSpacing: 6,
-          childAspectRatio: 1 / 1.5,
-          //mainAxisExtent: 300
-        ),
-        itemCount: wallpaperList.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ImageFullView(
-                          imgUrl: wallpaperList[index].src.portrait)));
-            },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Image.network(
-                wallpaperList[index].src.portrait,
-                fit: BoxFit.cover,
-              ),
+  return GridView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      shrinkWrap: true,
+      physics: BouncingScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 6,
+        mainAxisSpacing: 6,
+        childAspectRatio: 1 / 1.5,
+        //mainAxisExtent: 300
+      ),
+      itemCount: wallpaperList.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ImageFullView(
+                        imgUrl: wallpaperList[index].src.portrait)));
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Image.network(
+              wallpaperList[index].src.portrait,
+              fit: BoxFit.cover,
             ),
-          );
-        }),
-  );
+          ),
+        );
+      });
 }

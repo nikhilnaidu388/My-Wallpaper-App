@@ -56,60 +56,57 @@ class _HomeState extends State<Home> {
         title: brandName(),
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(30)),
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                          hintText: "search", border: InputBorder.none),
-                    ),
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(30)),
+            margin: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                        hintText: "search", border: InputBorder.none),
                   ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Search(
-                                      searchQuery: searchController.text,
-                                    )));
-                      },
-                      child: Container(child: Icon(Icons.search))),
-                ],
-              ),
+                ),
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Search(
+                                    searchQuery: searchController.text,
+                                  )));
+                    },
+                    child: Container(child: Icon(Icons.search))),
+              ],
             ),
-            SizedBox(
-              height: 16,
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Container(
+            height: 60,
+            child: ListView.builder(
+              itemCount: mylist.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return CategoryTile(
+                    imgUrl: mylist[index].imgUrl,
+                    title: mylist[index].categoryName);
+              },
             ),
-            Container(
-              height: 60,
-              color: Colors.amber,
-              child: ListView.builder(
-                itemCount: mylist.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                      imgUrl: mylist[index].imgUrl,
-                      title: mylist[index].categoryName);
-                },
-              ),
-            ),
-            wallpaperWidget(wallpaperList, context),
-            SizedBox(
-              height: 50,
-            )
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Expanded(child: wallpaperWidget(wallpaperList, context)),
+        ],
       ),
     );
   }
