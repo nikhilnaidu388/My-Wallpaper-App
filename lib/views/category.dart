@@ -40,7 +40,9 @@ class _CategoryState extends State<Category> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        centerTitle: true,
         title: brandName(),
         elevation: 0,
       ),

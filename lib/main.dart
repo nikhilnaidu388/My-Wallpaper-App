@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: "Wallpaper Hub",
       theme: ThemeData(primaryColor: Colors.white),
-      home: Home(),
+      home: FirstPage(),
     );
   }
 }

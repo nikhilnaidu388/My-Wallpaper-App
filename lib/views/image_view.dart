@@ -40,9 +40,9 @@ class _ImageFullViewState extends State<ImageFullView> {
                         width: MediaQuery.of(context).size.width / 2,
                         alignment: Alignment.bottomCenter,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(30),
                             border: Border.all(
-                                color: Colors.amber, style: BorderStyle.solid),
+                                color: Colors.black, style: BorderStyle.solid),
                             gradient: LinearGradient(colors: [
                               Color(0x36FFFFFF),
                               Color(0x0FFFFFFF)
@@ -51,17 +51,21 @@ class _ImageFullViewState extends State<ImageFullView> {
                           children: [
                             Text(
                               "Set As Wallpaper",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            Text("Save Image In Gallery",
-                                style: TextStyle(color: Colors.white))
+                            Text("Image will be saved in Gallery",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10))
                           ],
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 13,
                   ),
                   GestureDetector(
                     onTap: () {

@@ -7,7 +7,44 @@ import 'package:wallpaper_app/mydata/data.dart';
 import 'package:wallpaper_app/mywidgets/widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:wallpaper_app/views/category.dart';
+import 'package:wallpaper_app/views/collections.dart';
 import 'package:wallpaper_app/views/search.dart';
+
+class FirstPage extends StatefulWidget {
+  const FirstPage({Key? key}) : super(key: key);
+
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  int _currentIndex = 0;
+  var currPage = [Home(), Collections()];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: currPage[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.collections),
+            label: 'Collections',
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -34,10 +71,6 @@ class _HomeState extends State<Home> {
       wallpaperList.add(wallpaperobj);
       setState(() {});
     });
-
-    //print(wallpaperList);
-    // print(response.statusCode);
-    // print(response.body.toString());
   }
 
   @override
@@ -51,8 +84,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        backgroundColor: Colors.brown[100],
+        centerTitle: true,
         title: brandName(),
         elevation: 0.0,
       ),
@@ -70,7 +105,10 @@ class _HomeState extends State<Home> {
                   child: TextField(
                     controller: searchController,
                     decoration: InputDecoration(
-                        hintText: "search", border: InputBorder.none),
+                      //labelText: "search",
+                      hintText: "search",
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
                 InkWell(
@@ -106,6 +144,7 @@ class _HomeState extends State<Home> {
             height: 16,
           ),
           Expanded(child: wallpaperWidget(wallpaperList, context)),
+          //BottomNavigation(),
         ],
       ),
     );
@@ -159,6 +198,46 @@ class CategoryTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
+
+  @override
+  _BottomNavigationState createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  int _currentIndex = 0;
+  var currTab = [Home(), Collections()];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: currTab[_currentIndex],
+      bottomNavigationBar: newMethod1(),
+    );
+  }
+
+  BottomNavigationBar newMethod1() {
+    return BottomNavigationBar(
+      currentIndex: _currentIndex, // this will be set when a new tab is tapped
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "Home",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.collections),
+          label: 'Collections',
+        ),
+      ],
     );
   }
 }

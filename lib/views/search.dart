@@ -15,7 +15,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  TextEditingController searchController = TextEditingController();
+  //TextEditingController searchController = TextEditingController();
   List<WallpaperModel> wallpaperList = [];
   getSearchWallpapers(String query) async {
     var url = Uri.parse("https://api.pexels.com/v1/search?query=$query");
@@ -40,40 +40,44 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.brown[100],
         appBar: AppBar(
+          centerTitle: true,
           title: brandName(),
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-              child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(30)),
-                margin: EdgeInsets.symmetric(horizontal: 24),
-                padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: searchController,
-                        decoration: InputDecoration(
-                            hintText: "search", border: InputBorder.none),
-                      ),
-                    ),
-                    InkWell(
-                        onTap: () {
-                          getSearchWallpapers(searchController.text);
-                        },
-                        child: Container(child: Icon(Icons.search))),
-                  ],
-                ),
-              ),
-              wallpaperWidget(wallpaperList, context),
-            ],
-          )),
-        ));
+        body: wallpaperWidget(wallpaperList, context)
+        // SingleChildScrollView(
+        //   child: Container(
+        //       child: Column(
+        //     children: [
+        //       Container(
+        //         decoration: BoxDecoration(
+        //             color: Colors.grey[100],
+        //             borderRadius: BorderRadius.circular(30)),
+        //         margin: EdgeInsets.symmetric(horizontal: 24),
+        //         padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
+        //         child: Row(
+        //           children: [
+        //             Expanded(
+        //               child: TextField(
+        //                 controller: searchController,
+        //                 decoration: InputDecoration(
+        //                     hintText: "search", border: InputBorder.none),
+        //               ),
+        //             ),
+        //             InkWell(
+        //                 onTap: () {
+        //                   getSearchWallpapers(searchController.text);
+        //                 },
+        //                 child: Container(child: Icon(Icons.search))),
+        //           ],
+        //         ),
+        //       ),
+        //       wallpaperWidget(wallpaperList, context),
+        //     ],
+        //   )),
+        // )
+        );
   }
 }
